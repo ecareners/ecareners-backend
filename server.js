@@ -106,7 +106,7 @@ const upload = multer({
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:5173', // or '*' for all origins (not recommended for prod)
+  origin: 'https://ecareners-frontend.vercel.app', // or '*' for all origins (not recommended for prod)
   credentials: true // if you use cookies or HTTP auth
 }));
 app.use(express.json());
