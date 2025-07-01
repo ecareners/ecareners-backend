@@ -105,30 +105,19 @@ const upload = multer({
 });
 
 // Middleware
-const allowedOrigins = [
-  'http://localhost:5173',
-  'https://ecareners-frontend.vercel.app',
-  'https://ecareners-frontend-ecareners-projects.vercel.app'
-];
-
 app.use(cors({
-  origin: function(origin, callback){
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true
+  origin: 'https://ecareners-frontend.vercel.app', // or '*' for all origins (not recommended for prod)
+  credentials: true // if you use cookies or HTTP auth
 }));
+app.use(express.json());
 
 // Database configuration
 const dbConfig = {
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'ecareners',
-  port: process.env.DB_PORT || 3306
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  port: process.env.DB_PORT
 };
 
 // Create connection pool
