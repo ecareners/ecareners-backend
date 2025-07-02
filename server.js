@@ -569,6 +569,15 @@ app.post('/api/upload-to-drive', upload.single('file'), async (req, res) => {
       }
     });
 
+    // Make the uploaded file public
+    await drive.permissions.create({
+      fileId: response.data.id,
+      requestBody: {
+        role: 'reader',
+        type: 'anyone',
+      },
+    });
+
     // Clean up temporary file
     fs.unlinkSync(filePath);
 
