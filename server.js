@@ -108,6 +108,7 @@ const upload = multer({
 const allowedOrigins = [
   'https://ecareners-frontend.vercel.app',
   'https://ecareners.com',
+  'https://www.ecareners.com',
   'http://localhost:5173'
   // Add more domains as needed
 ];
