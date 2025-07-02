@@ -1164,6 +1164,13 @@ app.post('/api/setup/conference-table', async (req, res) => {
   }
 });
 
+// Google OAuth2 callback route for assignment purposes
+app.get('/auth/google/callback', async (req, res) => {
+  // You would typically handle the OAuth2 code exchange here
+  // For now, just send a simple response for testing
+  res.send('Google OAuth callback received!');
+});
+
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`API available at http://localhost:${PORT}/api`);
