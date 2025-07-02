@@ -105,9 +105,24 @@ const upload = multer({
 });
 
 // Middleware
+const allowedOrigins = [
+  'https://ecareners-frontend.vercel.app',
+  'https://ecareners.com',
+  'http://localhost:5173'
+  // Add more domains as needed
+];
+
 app.use(cors({
-  origin: 'https://ecareners-frontend.vercel.app', // or '*' for all origins (not recommended for prod)
-  credentials: true // if you use cookies or HTTP auth
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true
 }));
 app.use(express.json());
 
