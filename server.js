@@ -578,6 +578,12 @@ app.post('/api/upload-to-drive', upload.single('file'), async (req, res) => {
       },
     });
 
+    // Get the public URL of the file
+    const fileMeta = await drive.files.get({
+      fileId: response.data.id,
+      fields: 'webViewLink, webContentLink',
+    });
+
     // Clean up temporary file
     fs.unlinkSync(filePath);
 
@@ -587,7 +593,9 @@ app.post('/api/upload-to-drive', upload.single('file'), async (req, res) => {
       success: true,
       fileId: response.data.id,
       fileName: fileName,
-      message: 'File uploaded to Google Drive successfully'
+      webViewLink: fileMeta.data.webViewLink,
+      webContentLink: fileMeta.data.webContentLink,
+      message: 'File uploaded to Google Drive and made public successfully'
     });
 
   } catch (error) {
