@@ -109,7 +109,8 @@ const allowedOrigins = [
   'https://ecareners-frontend.vercel.app',
   'https://ecareners.com',
   'https://www.ecareners.com',
-  'http://localhost:5173'
+  'http://localhost:5173',
+  'https://api.ecareners.com'
   // Add more domains as needed
 ];
 
